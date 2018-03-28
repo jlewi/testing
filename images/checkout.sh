@@ -18,13 +18,20 @@ set -xe
 
 SRC_DIR=$1
 
+echo JOB_NAME=${JOB_NAME}
+echo JOB_TYPE=${JOB_TYPE}
+echo PROW_JOB_ID=${PROW_JOB_ID}
+echo PULL_BASE_REF=${PULL_BASE_REF}
+echo PULL_BASE_SHA=${PULL_BASE_SHA}
+echo PULL_REFS=${PULL_REFS}
+echo PULL_NUMBER=${PULL_NUMBER}
+echo PULL_PULL_SHA=${PULL_PULL_SHA}
+
 mkdir -p /src/${REPO_OWNER}
 
 # TODO(jlewi): We should eventually move the code for running the workflow from
 # kubeflow/kubeflow into kubeflow/testing
 git clone https://github.com/${REPO_OWNER}/${REPO_NAME}.git ${SRC_DIR}/${REPO_OWNER}/${REPO_NAME}
-
-echo Job Name = ${JOB_NAME}
 
 # See https://github.com/kubernetes/test-infra/tree/master/prow#job-evironment-variables
 REPO_DIR=${SRC_DIR}/${REPO_OWNER}/${REPO_NAME}
