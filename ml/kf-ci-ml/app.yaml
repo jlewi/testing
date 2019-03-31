@@ -1,0 +1,83 @@
+apiVersion: kfdef.apps.kubeflow.org/v1alpha1
+kind: KfDef
+metadata:
+  creationTimestamp: null
+  name: kf-ci-ml
+  namespace: kubeflow
+spec:
+  appdir: /home/jlewi/git_kubeflow-testing/ml/kf-ci-ml
+  componentParams:
+    cert-manager:
+    - initRequired: true
+      name: acmeEmail
+      value: jlewi@google.com
+    cloud-endpoints:
+    - name: secretName
+      value: admin-gcp-sa
+    iap-ingress:
+    - initRequired: true
+      name: ipName
+      value: kf-ci-ml-ip
+    - initRequired: true
+      name: hostname
+      value: kf-ci-ml.endpoints.github-probots.cloud.goog
+    pipeline:
+    - name: mysqlPd
+      value: kf-ci-ml-storage-metadata-store
+    - name: minioPd
+      value: kf-ci-ml-storage-artifact-store
+    spartakus:
+    - initRequired: true
+      name: usageId
+      value: "3501890029548355532"
+    - initRequired: true
+      name: reportUsage
+      value: "true"
+  components:
+  - ambassador
+  - argo
+  - centraldashboard
+  - cert-manager
+  - cloud-endpoints
+  - gcp-credentials-admission-webhook
+  - gpu-driver
+  - iap-ingress
+  - jupyter-web-app
+  - katib
+  - metacontroller
+  - notebook-controller
+  - pipeline
+  - profiles
+  - pytorch-operator
+  - spartakus
+  - tensorboard
+  - tf-job-operator
+  email: jlewi@google.com
+  hostname: kf-ci-ml.endpoints.github-probots.cloud.goog
+  ipName: kf-ci-ml-ip
+  packages:
+  - argo
+  - common
+  - examples
+  - gcp
+  - jupyter
+  - katib
+  - metacontroller
+  - modeldb
+  - mpi-job
+  - pipeline
+  - profiles
+  - pytorch-job
+  - seldon
+  - tensorboard
+  - tf-serving
+  - tf-training
+  platform: gcp
+  project: github-probots
+  repo: /home/jlewi/git_kubeflow-testing/ml/kf-ci-ml/.cache/master/kubeflow
+  serverVersion: file:/home/jlewi/git_kubeflow-testing/ml/kf-ci-ml/.cache/master/bootstrap/k8sSpec/v1.11.7/api/openapi-spec/swagger.json
+  useBasicAuth: false
+  useIstio: false
+  version: master
+  zone: us-east1-d
+status: {}
